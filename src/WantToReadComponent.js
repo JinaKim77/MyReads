@@ -15,7 +15,9 @@ class WantToReadComponent extends React.Component{
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
                             <Button allBooks={this.props.books}
-                                    changeBookShelf={this.props.changeBookShelf} />
+                                    changeBookShelf={this.props.changeBookShelf} 
+                                    books = {this.props.books} 
+                                    shelf = {this.props.shelf}/>
                          </div>
                           <div className="book-title">Book title : {book.title}</div>
                           <div className="book-authors">Author : {book.authors ? book.authors.join(', ') : 'Unknown Author'}</div>

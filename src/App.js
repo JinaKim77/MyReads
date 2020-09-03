@@ -28,7 +28,7 @@ class BooksApp extends React.Component {
  changeBookShelf=(book,shelf)=>{
 
   //change the shelf
-  BooksAPI.update(book,shelf);
+  //BooksAPI.update(book,shelf);
   console.log('Clicked!');
   if (shelf === 'none') {
       this.setState(prevState => ({
@@ -41,6 +41,8 @@ class BooksApp extends React.Component {
       }));
     }
     
+  BooksAPI.update(book,shelf);  
+  
   //Now update the book array in the state
   BooksAPI.getAll()
     .then(data=>
