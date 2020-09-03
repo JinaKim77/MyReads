@@ -24,17 +24,30 @@ class BooksApp extends React.Component {
     })
   }
 
-  //update function to handle changing the shelf of the book
-  changeBookShelf=(book,shelf)=>{
+ //update function to handle changing the shelf of the book
+ changeBookShelf=(book,shelf)=>{
 
-    //change the shelf
-    BooksAPI.update(book,shelf);
+  //change the shelf
+  BooksAPI.update(book,shelf);
+  console.log('Clicked!');
+  if (shelf === 'none') {
+      this.setState(prevState => ({
+        books: prevState.books.filter(b => b.id !== book.id)
+      }));
+    } else {
+      book.shelf = shelf;
+      this.setState(prevState => ({
+        books: prevState.books.filter(b => b.id !== book.id).concat(book)
+      }));
+    }
+    
+  //Now update the book array in the state
+  BooksAPI.getAll()
+    .then(data=>
+      this.setState({books:data}) 
+  )
+}
 
-    //Now update the book array in the state
-    BooksAPI.getAll().then(data=>
-     this.setState({books:data}) 
-      )
-  }
 
   render() {
     return (

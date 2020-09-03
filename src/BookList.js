@@ -7,7 +7,7 @@ import ReadComponent from './ReadComponent'
 
 //Each shelf should be displayed, so let's say each shelf should be in a box for their books to be displayed separately
 class BookList extends React.Component{
-    
+
     render(){
 
         return(
@@ -15,19 +15,19 @@ class BookList extends React.Component{
                 {/*Disaply first shelf*/}
                 <CurrentlyReadingComponent 
                     allBooks={this.props.allBooks.filter(book => book.shelf === 'currentlyReading')}
-                    changeBookShelf={this.changeBookShelf}
+                    changeBookShelf={this.props.changeBookShelf}
                 />
 
                 {/*Display second shelf*/ }
                 <WantToReadComponent 
                    allBooks={this.props.allBooks.filter(book => book.shelf === 'wantToRead')}
-                   changeBookShelf={this.changeBookShelf}
+                   changeBookShelf={this.props.changeBookShelf}
                 />
 
                 {/*Display third shelf*/}
                 <ReadComponent 
                     allBooks={this.props.allBooks.filter(book => book.shelf === 'read')}
-                    changeBookShelf={this.changeBookShelf}
+                    changeBookShelf={this.props.changeBookShelf}
                 />
 
                 {/*This link will only show up in main page*/}
