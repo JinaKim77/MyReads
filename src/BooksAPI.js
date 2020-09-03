@@ -17,6 +17,8 @@ export const get = (bookId) =>
     .then(res => res.json())
     .then(data => data.book)
 
+//getAll() is going to make a fetch request to your BooksAPI and is going to return a promise,
+//and when the promise resolves, you will have all of the books
 export const getAll = () =>
   fetch(`${api}/books`, { headers })
     .then(res => res.json())
