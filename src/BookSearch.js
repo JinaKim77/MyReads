@@ -10,7 +10,7 @@ class BookSearch extends React.Component{
     super(props)
 
     this.state={
-      message:'Search books that you want to read!',
+      message:'',
       showResult:false, //did you find the result?
       value:''
     }
@@ -25,6 +25,13 @@ class BookSearch extends React.Component{
 
     //Just to check
     console.log("value : "+val)
+
+    //Display message in search page. Depends on the search result!
+    if(this.props.searchBooksArr.length <= 0){
+      this.setState({ message: 'Sorry, no book found, try again!' })
+    }else{
+      this.setState({ message: 'Search books that you want to read!' })
+    }
   }
 
 
