@@ -5,7 +5,7 @@ import {Route} from 'react-router-dom'
 import BookList from './BookList.js'
 import BookSearch from './BookSearch.js'
 
-//Main page -- keep it simple in this page
+//parent component 
 class BooksApp extends React.Component {
 
   constructor(props) {
@@ -17,6 +17,7 @@ class BooksApp extends React.Component {
   }//end of consturctor
 
   // Get the book data when the component loads
+  // Get all books when app is loaded in browser
   componentDidMount(){
     BooksAPI.getAll()
       .then((data)=>{
@@ -24,31 +25,36 @@ class BooksApp extends React.Component {
     })
   }
 
+  
+
  //update function to handle changing the shelf of the book
  changeBookShelf=(book,shelf)=>{
-
-  //change the shelf
-  //BooksAPI.update(book,shelf);
-  console.log('Clicked!');
-  if (shelf === 'none') {
-      this.setState(prevState => ({
-        books: prevState.books.filter(b => b.id !== book.id)
-      }));
-    } else {
-      book.shelf = shelf;
-      this.setState(prevState => ({
-        books: prevState.books.filter(b => b.id !== book.id).concat(book)
-      }));
-    }
     
-  BooksAPI.update(book,shelf);  
-  
-  //Now update the book array in the state
-  BooksAPI.getAll()
-    .then(data=>
-      this.setState({books:data}) 
-  )
-}
+    //to save the changes done to the shelves
+    //when shelves are updated it is mantained even after refresh
+    BooksAPI.update(book,shelf);
+
+    if(shelf !== 'none'){
+        console.log("shelf is not none");
+        //book.shelf = shelf;
+        this.setState((state) => ({
+            books: state.books.filter((b) => b.id !== book.id).concat(book)
+        }));
+        console.log(book.shelf);
+    }else{ //shelf==='none'
+        console.log("shelf is none");
+        this.setState((state) => ({
+            books: state.books.filter((b) => b.id !== book.id)
+        }));
+    }
+
+    //get updated data
+    //BooksAPI.getAll()
+     // .then((data)=>{
+      //  this.setState({books:data})
+      //})
+
+}//end of this method
 
 
   render() {
@@ -64,7 +70,7 @@ class BooksApp extends React.Component {
             <BookList 
               allBooks={this.state.books}
               changeBookShelf={this.changeBookShelf}
-            /> //render BookList Component, to do that you need to import BookList component
+            /> //render BookList Component
           )}
         />
 
@@ -74,7 +80,7 @@ class BooksApp extends React.Component {
             <BookSearch 
               allBooks={this.state.books}
               changeBookShelf={this.changeBookShelf}
-            /> //render BookList Component, to do that you need to import that component
+            /> //render BookList Component
           )}
         />
           

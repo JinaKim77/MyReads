@@ -18,6 +18,7 @@ class CurrentlyReadingComponent extends React.Component{
                             <Button allBooks={this.props.books}
                                     changeBookShelf={this.props.changeBookShelf} 
                                     books = {this.props.books} 
+                                    book={this.props}  //---
                                     shelf = {this.props.shelf}/>
                          </div>
                           <div className="book-title">Book title : {book.title}</div>

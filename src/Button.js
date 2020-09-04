@@ -1,18 +1,26 @@
 import React from 'react'
 import './App.css'
-import * as BooksAPI from './BooksAPI'
 
 class Button extends React.Component{
 
     state={
-        shelf:this.props.shelf,
-        book:this.props.id
+        value: this.props.shelf
     }
     
+    handleChange = hc => {
+        const book = this.props.book
+        const newShelf = hc.target.value
+        this.setState({
+            value: newShelf
+        })
+    
+        this.props.changeBookShelf(book, newShelf)         
+    }
+
     render(){
         return(
             <div className="book-shelf-changer">
-                <select value={this.state.shelf} onChange={this.props.changeBookShelf} >
+                <select value={this.state.value} onChange={this.handleChange} >
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
