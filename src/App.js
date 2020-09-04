@@ -40,7 +40,9 @@ class BooksApp extends React.Component {
         console.log("shelf is not none");
         //book.shelf = shelf;
         this.setState((state) => ({
-            books: state.books.filter((b) => b.id !== book.id).concat(book)
+            books: state.books.filter((b) => b.id !== book.id)
+            //concatenating book to the state.books
+            .concat({ ...book, shelf }) //add the book with the updated shelf value
         }));
         console.log(book.shelf);
     }else{ //shelf==='none'
@@ -49,12 +51,6 @@ class BooksApp extends React.Component {
             books: state.books.filter((b) => b.id !== book.id)
         }));
     }
-
-    //get updated data
-    //BooksAPI.getAll()
-    // .then((data)=>{
-    //  this.setState({books:data})
-    //})
 
 }//end of this method
 

@@ -14,11 +14,15 @@ class CurrentlyReadingComponent extends React.Component{
                       {this.props.allBooks.map((book)=>(
                         <li key={book.id}>
                          <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
+                            <div className="book-cover" 
+                                 style={{ width: 128, 
+                                          height: 193, 
+                                          backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
+                            </div>
                             <Button allBooks={this.props.books}
                                     changeBookShelf={this.props.changeBookShelf} 
                                     books = {this.props.books} 
-                                    book={this.props}  //---
+                                    book={book}  //book should be passed for book props
                                     shelf = {this.props.shelf}/>
                          </div>
                           <div className="book-title">Book title : {book.title}</div>
