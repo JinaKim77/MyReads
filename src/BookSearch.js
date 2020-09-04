@@ -42,7 +42,7 @@ class BookSearch extends React.Component{
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-                  {/*Display the result here!*/}
+                  {/*Display search result!*/}
                   {this.props.searchBooksArr.map(book=>(
                     <Result book={book} changeBookShelf={this.props.changeBookShelf}/>))}
               </ol>
