@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css'
 import {Link} from 'react-router-dom'
 //import ReactDOM from 'react-dom'
+import Result from './Result'
 
 class BookSearch extends React.Component{
 
@@ -10,8 +11,20 @@ class BookSearch extends React.Component{
 
     this.state={
       message:'Search books that you want to read!',
-      searched:false //is the user input something on the page?
+      showResult:false, //did you find the result?
+      value:''
     }
+  }
+
+  handleChange=event=>{
+    const val = event.target.value;
+    this.setState({ value: val })
+    
+    //call this search() method here!
+    this.props.searchBooks(val)
+
+    //Just to check
+    console.log("value : "+val)
   }
 
 
@@ -23,12 +36,16 @@ class BookSearch extends React.Component{
               <button></button>
               <Link to='/' className="close-search">Close</Link>
               <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author"/>
+                <input type="text" placeholder="Search by title or author" value={this.state.value} onChange={this.handleChange}/>
 
               </div>
             </div>
             <div className="search-books-results">
-              <ol className="books-grid"></ol>
+              <ol className="books-grid">
+                  {/*Display the result here!*/}
+                  {this.props.searchBooksArr.map(book=>(
+                    <Result book={book} changeBookShelf={this.props.changeBookShelf}/>))}
+              </ol>
             </div>
           </div>
         )

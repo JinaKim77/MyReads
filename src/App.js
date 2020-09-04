@@ -12,7 +12,9 @@ class BooksApp extends React.Component {
     super(props);
 
     this.state = {
-      books: []
+      books: [],
+
+      searchBooksArr:[]  
     }
   }//end of consturctor
 
@@ -50,12 +52,26 @@ class BooksApp extends React.Component {
 
     //get updated data
     //BooksAPI.getAll()
-     // .then((data)=>{
-      //  this.setState({books:data})
-      //})
+    // .then((data)=>{
+    //  this.setState({books:data})
+    //})
 
 }//end of this method
 
+searchBooks = (query) => {
+    if (query.length > 0) {
+      BooksAPI.search(query)
+        .then(books => {
+          if (books.error) {//when error occurs
+            this.setState({ searchBooksArr: [] });
+          } else {
+            this.setState({ searchBooksArr: books });
+          }
+      });
+    }else {//query.length equal to 0 or less than 0
+        this.setState({ searchBooksArr: [] });
+    }
+  };
 
   render() {
     return (
@@ -80,6 +96,8 @@ class BooksApp extends React.Component {
             <BookSearch 
               allBooks={this.state.books}
               changeBookShelf={this.changeBookShelf}
+              searchBooks={this.searchBooks}
+              searchBooksArr={this.state.searchBooksArr}
             /> //render BookList Component
           )}
         />

@@ -7,16 +7,21 @@ class Button extends React.Component{
         value: this.props.shelf
     }
     
-    handleChange = hc => {
+    handleChange = event => {
         const book = this.props.book
-        const newShelf = hc.target.value
+        const newShelf = event.target.value
+
         this.setState({
             value: newShelf
         })
     
         this.props.changeBookShelf(book, newShelf)         
+
+        //Just to check the selected value from the user
+        console.log("value:"+newShelf)
     }
 
+    
     render(){
         return(
             <div className="book-shelf-changer">
