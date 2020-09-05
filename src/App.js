@@ -12,9 +12,7 @@ class BooksApp extends React.Component {
     super(props);
 
     this.state = {
-      books: [],
-
-      searchBooksArr:[]  
+      books: [] 
     }
   }//end of consturctor
 
@@ -26,8 +24,6 @@ class BooksApp extends React.Component {
         this.setState({books:data})
     })
   }
-
-  
 
  //update function to handle changing the shelf of the book
  changeBookShelf=(book,shelf)=>{
@@ -54,21 +50,6 @@ class BooksApp extends React.Component {
 
 }//end of this method
 
-searchBooks = (query) => {
-    if (query.length > 0) {
-      BooksAPI.search(query)
-        .then(books => {
-          if (books.error) {//when error occurs
-            this.setState({ searchBooksArr: [] });
-          } else {
-            this.setState({ searchBooksArr: books });
-          }
-      });
-    }else {//query.length equal to 0 or less than 0
-        this.setState({ searchBooksArr: [] });
-    }
-  };
-
   render() {
     return (
       <div className="app">
@@ -77,31 +58,25 @@ searchBooks = (query) => {
               <h1>MyReads</h1>
             </div>
         <Route
-          exact path='/'
-          render={ ()=>(
-            <BookList 
+          exact path='/'>
+            <BookList  //To render something when a route is matched, we can also pass it as a child. 
               allBooks={this.state.books}
               changeBookShelf={this.changeBookShelf}
-            /> //render BookList Component
-          )}
-        />
+            /> 
+        </Route>
 
         <Route
-          path='/search'
-          render={()=>(
-            <BookSearch 
+          path='/search'>
+            <BookSearch  //To render something when a route is matched, we can also pass it as a child. 
               allBooks={this.state.books}
               changeBookShelf={this.changeBookShelf}
-              searchBooks={this.searchBooks}
-              searchBooksArr={this.state.searchBooksArr}
-            /> //render BookList Component
-          )}
-        />
+            /> 
+        </Route>
           
         </div>
       </div>
-    )//end of return
-  }//end of render()
-}//end of App component
+    )
+  }
+}
 
   export default BooksApp;

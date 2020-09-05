@@ -2,14 +2,14 @@ import React from 'react'
 import './App.css'
 import Button from './Button'
 
-class CurrentlyReadingComponent extends React.Component{
+class BookShelf extends React.Component{
     
     render(){
         return(
             <div className="list-books-content">
               <div>
                 <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
+                  <h2 className="bookshelf-title">{this.props.title}</h2>
                     <ol className="books-grid">
                       {this.props.allBooks.map((book)=>(
                         <li key={book.id}>
@@ -19,11 +19,11 @@ class CurrentlyReadingComponent extends React.Component{
                                           height: 193, 
                                           backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
                             </div>
-                            <Button allBooks={this.props.books}
+                            <Button 
                                     changeBookShelf={this.props.changeBookShelf} 
                                     books = {this.props.books} 
-                                    book={book}  //book should be passed for book props
-                                    shelf = {this.props.shelf}/>
+                                    book={book}  //book should be passed for book props 
+                            />
                          </div>
                           <div className="book-title">Book title : {book.title}</div>
                           <div className="book-authors">Author : {book.authors ? book.authors.join(', ') : 'Unknown Author'}</div>
@@ -38,4 +38,4 @@ class CurrentlyReadingComponent extends React.Component{
     }
 
 }
-export default CurrentlyReadingComponent
+export default BookShelf

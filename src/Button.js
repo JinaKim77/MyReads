@@ -3,22 +3,12 @@ import './App.css'
 
 class Button extends React.Component{
 
-    state={
-        value: this.props.shelf
-    }
     
     handleChange = event => {
         const book = this.props.book
         const newShelf = event.target.value
-
-        this.setState({
-            value: newShelf
-        })
     
         this.props.changeBookShelf(book, newShelf)         
-
-        //Just to check the selected value from the user
-        console.log("value:"+newShelf)
     }
 
     
