@@ -13,46 +13,50 @@ class BookSearch extends React.Component{
       message:'',
       showResult:false, //did you find the result?
       value:'',
-      searchBooksArr:[] 
+      searchBooksArr:[]
     }
   }
 
   searchBooks = (query) => {
-    if (query.length > 0) {
+    if (query !== '') {
       BooksAPI.search(query)
         .then(books => {
           if (books.error) {//when error occurs
             this.setState({ searchBooksArr: [] });
           } else {
-            console.log("check query 1: "+query)
-            console.log("check searchBooksArr : "+this.state.searchBooksArr)
+            console.log("query.length greater than 0: "+query)
 
             //before updating the state, check if the search result is from the latest search query
+            //this.setState is a promise and changes are not reflected instantly
             this.setState({ searchBooksArr: books });
+
+                //Display message in search page. Depends on the search result!
+                if(this.state.searchBooksArr.length > 0){
+                    this.setState({ message: '-- Result --' })
+                }
           }
       });
     }else {//query.length equal to 0 or less than 0
-        console.log("check query 2: "+query)
+        console.log("when query.length equal to 0 or less than 0: "+query)
         this.setState({ searchBooksArr: [] });
+        this.setState({ message: '-- Search books that you want to read! --' })
     }
   };
 
-
+  // function that uses BooksAPI search method
   handleChange=event=>{
     const val = event.target.value;
     this.setState({ value: val })
     
-    //call this search() method here!
-    this.searchBooks(val)
+    //this.searchBooks(val)
+    //This will make sure that the API call is made with a delay after the user has stopped typing in the input field
+    setTimeout(() => {                     
+      this.searchBooks(this.state.value)
+    }, 300)
 
-    //Just to check
-    console.log("value : "+val)
-
-    //Display message in search page. Depends on the search result!
+    //Display this message when there is no match and no found books! 
     if(this.state.searchBooksArr.length <= 0){
-      this.setState({ message: 'Sorry, no book found, try again!' })
-    }else{
-      this.setState({ message: 'Search books that you want to read!' })
+      this.setState({ message: '-- No book found --' })
     }
   }
 

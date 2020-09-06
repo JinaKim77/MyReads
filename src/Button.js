@@ -18,7 +18,7 @@ class Button extends React.Component{
                 {/*By default, the first not disabled option will be selected, which is "Currently Reading"
                    value={this.state.value} will be always undefined*
                    So value={this.props.book.shelf} */}
-                <select value={this.props.book.shelf} onChange={this.handleChange} >
+                <select value={this.props.book.shelf || 'none'} onChange={this.handleChange} >
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
