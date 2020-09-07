@@ -19,14 +19,14 @@ import BookShelf from './BookShelf'
             }
           ];
 
-        const BookList =({allBooks,changeBookShelf}) =>(
+        const BookList =({books,changeBookShelf}) =>(
             <div>
                 {/*Disaply shelves*/}
                 {SHELVES.map(({ title, id})=>(
                      <BookShelf 
                      key={id}
                      title={title}
-                     allBooks={allBooks.filter(book => book.shelf === id)}
+                     books={books.filter(book => book.shelf === id)}
                      changeBookShelf={changeBookShelf}
                  />
                 ))}

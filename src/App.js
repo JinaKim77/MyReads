@@ -60,7 +60,7 @@ class BooksApp extends React.Component {
         <Route
           exact path='/'>
             <BookList  //To render something when a route is matched, we can also pass it as a child. 
-              allBooks={this.state.books}
+              books={this.state.books}
               changeBookShelf={this.changeBookShelf}
             /> 
         </Route>
@@ -68,7 +68,7 @@ class BooksApp extends React.Component {
         <Route
           path='/search'>
             <BookSearch  //To render something when a route is matched, we can also pass it as a child. 
-              allBooks={this.state.books}
+              books={this.state.books}
               changeBookShelf={this.changeBookShelf}
             /> 
         </Route>

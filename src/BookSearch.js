@@ -62,14 +62,14 @@ class BookSearch extends React.Component{
 
     render(){
 
+      const {books}=this.props;
+
       const searchBooksArr = this.state.searchBooksArr.map((book) => {
-        const bookOnShelf = this.props.books.find((b) => b.id === book.id);
-        if(bookOnShelf.length>0){
-          return{
-            ...book,
-          shelf: bookOnShelf ? bookOnShelf.shelf : "none",
-          }
-        }
+        const bookOnShelf = books.filter((b) => b.id === book.id);
+            return{
+              ...book,
+              shelf: bookOnShelf.shelf ? bookOnShelf.shelf :"none"
+            }
       });
        
         return(
@@ -87,7 +87,7 @@ class BookSearch extends React.Component{
                   {searchBooksArr.map(book=>(
                     //a unique key prop should be provided for each list item
                     //This allows React to efficiently keep track of changes in the list.
-                   <Result key={book.id} book={book} changeBookShelf={this.props.changeBookShelf} shelf={book.shelf}/>
+                   <Result key={book.id} book={book} changeBookShelf={this.props.changeBookShelf}/>
                   ))}
               </ol>
             </div>

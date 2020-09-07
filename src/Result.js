@@ -18,9 +18,9 @@ class Result extends React.Component{
                    //backgroundImage: `url(${book.imageLinks.thumbnail})`
                    backgroundImage: `url(${book.hasOwnProperty("imageLinks")? book.imageLinks.thumbnail: ""})`}}
                />
-               <Button book={this.props.book} 
-                       shelf={shelf} 
-                       allBooks={this.props.books}
+               <Button book={book} 
+                       shelf={shelf}
+                       books={this.props.books}
                        changeBookShelf={this.props.changeBookShelf}/>
              </div>
              <div className="book-title">Book title : {book.title}</div>
