@@ -20,20 +20,27 @@ class BookSearch extends React.Component{
     if (query !== '') {
       BooksAPI.search(query)
         .then(books => {
-          if (books.error) {//when error occurs
-            this.setState({ searchBooksArr: [] });
-          } else {
-            console.log("query.length greater than 0: "+query)
+          if (books.error  ||books === undefined) {//when error occurs
+            console.log("Error occurs");
+            this.setState({ books: [] });
+          } 
+          
+          books=books.map((book)=>{
+            const bookInShelf = this.props.books.find(b=>b.id===book.id);
 
-            //before updating the state, check if the search result is from the latest search query
-            //this.setState is a promise and changes are not reflected instantly
-            this.setState({ searchBooksArr: books });
+            if(bookInShelf){
+              book.shelf=bookInShelf.shelf;
+            }
+            return book;
+          })
 
-                //Display message in search page. Depends on the search result!
-                if(this.state.searchBooksArr.length > 0){
-                    this.setState({ message: '-- Result --' })
-                }
+          this.setState({searchBooksArr:books})
+        
+          //Display message in search page. Depends on the search result!
+          if(this.state.searchBooksArr.length > 0){
+            this.setState({ message: '-- Result --' })
           }
+          
       });
     }else {//query.length equal to 0 or less than 0
         console.log("when query.length equal to 0 or less than 0: "+query)
@@ -61,16 +68,6 @@ class BookSearch extends React.Component{
 
 
     render(){
-
-      const {books}=this.props;
-
-      const searchBooksArr = this.state.searchBooksArr.map((book) => {
-        const bookOnShelf = books.filter((b) => b.id === book.id);
-            return{
-              ...book,
-              shelf: bookOnShelf.shelf ? bookOnShelf.shelf :"none"
-            }
-      });
        
         return(
             <div className="search-books">
@@ -84,7 +81,7 @@ class BookSearch extends React.Component{
             <div className="search-books-results">
               <ol className="books-grid">
                   {/*Display search result!*/}
-                  {searchBooksArr.map(book=>(
+                  {this.state.searchBooksArr.map(book=>(
                     //a unique key prop should be provided for each list item
                     //This allows React to efficiently keep track of changes in the list.
                    <Result key={book.id} book={book} changeBookShelf={this.props.changeBookShelf}/>

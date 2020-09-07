@@ -32,6 +32,18 @@ class BooksApp extends React.Component {
     //when shelves are updated it is mantained even after refresh
     BooksAPI.update(book,shelf);
 
+    let booksOnShelf = this.state.books.slice(0);
+
+    const books = booksOnShelf.filter(b => b.id === book.id);
+    if (books.length){
+      books[0].shelf=shelf;
+    }
+    else{
+      book.shelf=shelf;
+      booksOnShelf.push(book);
+    }
+    this.setState({books:booksOnShelf})
+        
     if(shelf !== 'none'){
         console.log("shelf is not none");
         //book.shelf = shelf;

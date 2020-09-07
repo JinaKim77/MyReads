@@ -7,7 +7,7 @@ class Result extends React.Component{
        const {book,shelf}  = this.props;
         
        return (
-         <li>
+         <li key={book.id}>
            <div className="book">
              <div className="book-top">
                <div
