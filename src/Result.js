@@ -25,7 +25,6 @@ class Result extends React.Component{
              </div>
              <div className="book-title">Book title : {book.title}</div>
              <div className="book-authors">Author : {book.authors ? book.authors.join(', ') : 'Unknown Author'}</div>
-             <div className="book-authors">Shelf : {book.shelf}</div>
            </div>
          </li>
        );

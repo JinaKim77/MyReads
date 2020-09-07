@@ -11,7 +11,6 @@ class BookSearch extends React.Component{
 
     this.state={
       message:'',
-      showResult:false, //did you find the result?
       value:'',
       searchBooksArr:[]
     }
@@ -62,6 +61,17 @@ class BookSearch extends React.Component{
 
 
     render(){
+
+      const searchBooksArr = this.state.searchBooksArr.map((book) => {
+        const bookOnShelf = this.props.books.find((b) => b.id === book.id);
+        if(bookOnShelf.length>0){
+          return{
+            ...book,
+          shelf: bookOnShelf ? bookOnShelf.shelf : "none",
+          }
+        }
+      });
+       
         return(
             <div className="search-books">
               <h1>{this.state.message}</h1>
@@ -74,10 +84,11 @@ class BookSearch extends React.Component{
             <div className="search-books-results">
               <ol className="books-grid">
                   {/*Display search result!*/}
-                  {this.state.searchBooksArr.map(book=>(
+                  {searchBooksArr.map(book=>(
                     //a unique key prop should be provided for each list item
                     //This allows React to efficiently keep track of changes in the list.
-                    <Result key={book.id} book={book} changeBookShelf={this.props.changeBookShelf}/>))}
+                   <Result key={book.id} book={book} changeBookShelf={this.props.changeBookShelf} shelf={book.shelf}/>
+                  ))}
               </ol>
             </div>
           </div>

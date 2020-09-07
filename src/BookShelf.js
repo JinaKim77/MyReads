@@ -13,7 +13,8 @@ class BookShelf extends React.Component{
                     <ol className="books-grid">
                       {this.props.allBooks.map((book)=>(
                         <li key={book.id}>
-                         <div className="book-top">
+                         <div className="book">
+                          <div className="book-top">
                             <div className="book-cover" 
                                  style={{ width: 128, 
                                           height: 193, 
@@ -25,10 +26,10 @@ class BookShelf extends React.Component{
                                     books = {this.props.books} 
                                     book={book}  //book should be passed for book props 
                             />
-                         </div>
+                          </div>
                           <div className="book-title">Book title : {book.title}</div>
                           <div className="book-authors">Author : {book.authors ? book.authors.join(', ') : 'Unknown Author'}</div>
-                          <div className="book-authors">Shelf : {book.shelf}</div>
+                         </div>
                         </li>
                       ))}
                     </ol> 
