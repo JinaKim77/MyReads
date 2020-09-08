@@ -20,28 +20,29 @@ class BookSearch extends React.Component{
     if (query !== '') {
       BooksAPI.search(query)
         .then(books => {
-          if (books.error  ||books === undefined) {//when error occurs
-            console.log("Error occurs");
-            this.setState({ books: [] });
+          if(books.error  ||books === undefined) {//when error occurs
+              console.log("Error occurs");
+              this.setState({ books: [] });
           } 
-          
-          books=books.map((book)=>{
-            const bookInShelf = this.props.books.find(b=>b.id===book.id);
+          else{
+              books=books.map((book)=>{
+                const bookInShelf = this.props.books.find(b=>b.id===book.id);
 
-            if(bookInShelf){
-              book.shelf=bookInShelf.shelf;
-            }
-            return book;
-          })
+                if(bookInShelf){
+                   book.shelf=bookInShelf.shelf;
+                }
+                return book;
+              })
 
-          this.setState({searchBooksArr:books})
-        
+              this.setState({searchBooksArr:books})
+          }
+
           //Display message in search page. Depends on the search result!
           if(this.state.searchBooksArr.length > 0){
             this.setState({ message: '-- Result --' })
           }
           
-      });
+        });
     }else {//query.length equal to 0 or less than 0
         console.log("when query.length equal to 0 or less than 0: "+query)
         this.setState({ searchBooksArr: [] });

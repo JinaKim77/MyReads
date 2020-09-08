@@ -3,7 +3,7 @@
 This is the starter template for the final assessment project for Udacity's React Fundamentals course. 
 The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
 
-This MyReads app allows users to manage books in three different shelves that are "Currently Reading" , "Want To Read" , "Read" and "none". Users can also search for new books and categorize them accordingly.
+This MyReads app allows users to manage books in three different shelves that are "Currently Reading" , "Want To Read" , "Read" and "none". Users can also search for new books and categorize them accordingly (The search page allows users to select their preferred shelf). Books that have not been assigned a shelf should have a checkmark next to "None". If a book is assigned to a shelf on the main page and that book appears on the search page, the correct shelf should be selected on the search page.
 
 
 
